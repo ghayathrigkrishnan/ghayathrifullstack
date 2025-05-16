@@ -6,7 +6,7 @@ const cors = require('cors');
 const path = require('path');
 
 const app = express();
-const port = 3000;
+const port = process.env.port||3000;
 
 // Middleware
 app.use(cors());
@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // MongoDB connection
-mongoose.connect(process.env.MONGODB_URI,{
+mongoose.connect("mongodb+srv://ghayu2006:ghayathri@cluster0.ec4cpsl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",{
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => console.log('Connected to MongoDB'))
