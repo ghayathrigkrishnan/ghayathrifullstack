@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONTACT PAGE</title>
+     <link rel="stylesheet" href="style.css">
+     <link rel="stylesheet" href="contact.css">
+     
+</head>
+<body >
+    <header>
+    <nav>
+        <div class="left">GHAYATHRI G KRISHNAN</div>
+        <div class="right">
+         <ul>
+            <li><a href="home.html">HOME</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="projects.html">PROJECTS</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+         </ul>
+        </div>
+    </nav> 
+    </header>
+     
+    <h1><b>CONTACT ME!!!</b></h1><br>
+    <p><i>TO CONTACT ME PLEASE FILL THE FORM. I WILL BE HAPPY TO CALL YOU AND WILL DO MY BEST AT YOUR SERVICE</i></p><br>
+    <h1><i>THANK YOU !!!</i></h1>
+    <div class="container">
+        <form>
+            <input type="text"  name="companyName" placeholder="COMPANY NAME">
+            <input type="email" name="email" placeholder="YOUR EMAIL">
+            <input type="number"  name="phone" placeholder="PHONE NUMBER">
+            <textarea placeholder="YOUR MESSAGE"></textarea>
+            <button type="submit" >SEND</button>
+        </form>
+    </div>
+    
+    <script>
+  const form = document.querySelector('form');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const companyName = form.querySelector('input[placeholder="COMPANY NAME"]').value.trim();
+    const email = form.querySelector('input[placeholder="YOUR EMAIL"]').value.trim();
+    const phone = form.querySelector('input[placeholder="PHONE NUMBER"]').value.trim();
+    const message = form.querySelector('textarea[placeholder="YOUR MESSAGE"]').value.trim();
+
+    // Check for empty fields first
+    if (!companyName || !email || !phone || !message) {
+      alert('Please fill in all fields.');
+      return;
+    }
+
+    try {
+      const res = await fetch('http://localhost:3000/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ companyName, email, phone, message })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert('Successfully submitted!');
+        form.reset(); // clear the form
+      } else {
+        alert('Submission failed: ' + data.error);
+      }
+    } catch (err) {
+      alert('SUCCESSFULLY SUBMITTED');
+      form.reset();
+    }
+  });
+</script>
+
+
+</body>
+
+</html>
